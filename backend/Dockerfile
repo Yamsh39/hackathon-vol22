@@ -11,5 +11,7 @@ RUN npm install
 # アプリのソースコードをコピー
 COPY . .
 
+RUN npx prisma generate
+
 # サーバーを起動
-CMD ["npm", "run", "dev"]
+CMD ["node", "server.js"]
