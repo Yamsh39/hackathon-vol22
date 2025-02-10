@@ -25,4 +25,5 @@ dist-ssr
 
 # prisma
 backend/prisma/migrations/
+
 .env
