@@ -1,4 +1,7 @@
-# My Web App
+# hackathon-vol22
+--
+
+# React + Vite
 
 このプロジェクトは、Reactを使ったフロントエンド、ExpressとNode.jsを使ったバックエンド、PostgreSQLを使ったデータベースを構築したフルスタックWebアプリケーションです。すべてのサービスはDockerでコンテナ化され、`docker-compose`を使って簡単に開発環境を立ち上げることができます。
 
@@ -9,13 +12,39 @@
 - **データベース**: PostgreSQL
 - **コンテナ管理**: Docker, Docker Compose
 
-## セットアップ方法
+以下を実行してみてできなかったらchatGPTに聞いてみて
+```bash
+$ docker compose up --build
+```
 
-1. リポジトリをクローン：
-   ```bash
-   git clone https://github.com/your-username/my-app.git
-   cd my-app
+## ディレクトリ構成
+```
+hackathon-vol22
+├── backend
+│   ├── node_modules
+│   ├── Dockerfile
+│   ├── package-lock.json
+│   ├── package.json
+│   └── server.js
+├── frontend
+│   ├── node_modules
+│   ├── public
+│   ├── src
+│   │   ├── assets
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   ├── main.jsx
+│   │   └── index.html
+│   ├── Dockerfile
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── README.md
+│   └── vite.config.js
+├── .env
+├── .gitignore
+└── docker-compose.yml
+```
 
-2. .envファイルの作成
-   discordで共有
-   
