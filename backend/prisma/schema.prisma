@@ -18,4 +18,15 @@ model Receipt {
   date       DateTime
   outcome    Float
   detail     String
+  items      Item[]
+}
+
+model Item {
+  item_id    Int      @id @default(autoincrement())
+  name       String   
+  price      Float
+  quantity   Int
+  category   String
+  receipt_id Int
+  receipt    Receipt  @relation(fields: [receipt_id], references: [receipt_id])
 }
