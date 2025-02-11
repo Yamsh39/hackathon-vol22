@@ -57,7 +57,16 @@ docker exec -it hackathon-vol22-backend-1 sh
 npx prisma migrate dev
 ```
 
-### 9. ブラウザでアプリケーションにアクセスする
+### 9. azureのセットアップをする
+```bash
+cd backend/
+npm install express axios dotenv cors multer
+
+cd frontend/
+npm install axios
+```
+
+### 10. ブラウザでアプリケーションにアクセスする
 - フロントエンド: [http://localhost:3000](http://localhost:3000)
 - バックエンド: [http://localhost:4000](http://localhost:4000)
 - データベース: [http://localhost:5432](http://localhost:5432)

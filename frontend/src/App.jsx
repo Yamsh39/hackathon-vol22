@@ -5,10 +5,6 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
-  fetch('http://backend:5000/api/endpoint')  // 'localhost' ではなく 'backend' を使う
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error('Error:', error))
   return (
     <>
       <div>
