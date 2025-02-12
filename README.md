@@ -66,6 +66,12 @@ cd frontend/
 npm install axios
 ```
 
+### 10. Geminiのセットアップをする
+```bash
+cd backend\
+npm install @google/generative-ai
+```
+
 ### 10. ブラウザでアプリケーションにアクセスする
 - フロントエンド: [http://localhost:3000](http://localhost:3000)
 - バックエンド: [http://localhost:4000](http://localhost:4000)
