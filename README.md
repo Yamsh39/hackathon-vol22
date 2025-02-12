@@ -41,23 +41,12 @@ npm install
 cd ..
 ```
 
-### 6. 環境変数ファイルを作成する(内容は直接もらう)
+### 6. 環境変数ファイルを作成する(discordに記載)
 ```bash
 touch .env
 ```
 
-### 7. Dockerコンテナを立ち上げる
-```bash
-docker compose up --build
-```
-
-### 8. prismaのmigrateを実行する
-```bash
-docker exec -it hackathon-vol22-backend-1 sh
-npx prisma migrate dev
-```
-
-### 9. azureのセットアップをする
+### 7. azureのセットアップをする
 ```bash
 cd backend/
 npm install express axios dotenv cors multer
@@ -66,15 +55,26 @@ cd frontend/
 npm install axios
 ```
 
-### 10. Geminiのセットアップをする
+### 8. Geminiのセットアップをする
 ```bash
 cd backend\
 npm install @google/generative-ai
 ```
 
-### 10. ブラウザでアプリケーションにアクセスする
+### 9. Dockerコンテナを立ち上げる
+```bash
+docker compose up --build
+```
+
+### 10. prismaのmigrateを実行する
+```bash
+docker exec -it hackathon-vol22-backend-1 sh
+npx prisma migrate dev
+```
+
+### 11. ブラウザでアプリケーションにアクセスする
 - フロントエンド: [http://localhost:3000](http://localhost:3000)
-- バックエンド: [http://localhost:4000](http://localhost:4000)
+- バックエンド: [http://localhost:5000](http://localhost:5000)
 - データベース: [http://localhost:5432](http://localhost:5432)
 - pgAdmin: [http://localhost:5050](http://localhost:5050)
 
@@ -83,30 +83,34 @@ npm install @google/generative-ai
 ```
 hackathon-vol22
 ├── backend
-│   ├── node_modules
+│   ├── prisma
+│   │   └── schema.prisma
+│   ├── uploads
+│   ├── .env
+│   ├── .gitignore
 │   ├── Dockerfile
 │   ├── package-lock.json
 │   ├── package.json
 │   └── server.js
 ├── frontend
-│   ├── node_modules
 │   ├── public
+│   │   └── vite.svg
 │   ├── src
 │   │   ├── assets
+│   │   │   └── react.svg
 │   │   ├── App.css
 │   │   ├── App.jsx
 │   │   ├── index.css
 │   │   ├── main.jsx
-│   │   └── index.html
+│   │   └── ReceiptsForm.jsx
 │   ├── Dockerfile
 │   ├── eslint.config.js
 │   ├── index.html
 │   ├── package-lock.json
 │   ├── package.json
-│   ├── README.md
 │   └── vite.config.js
-├── .env
 ├── .gitignore
-└── docker-compose.yml
+├── docker-compose.yaml
+└── README.md
 ```
 
