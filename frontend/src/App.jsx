@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navigation from './components/Navigation'; // ナビゲーションをインポート
-import Home from './pages/Home'; // ホームページをインポート
-import About from './pages/About'; // Aboutページをインポート
+import Navigation from './components/Navigation';
+import Home from './pages/Home';
+import About from './pages/About';
 import ReceiptForm from './pages/ReceiptsForm';
 
 function App() {
