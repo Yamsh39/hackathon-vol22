@@ -26,4 +26,7 @@ dist-ssr
 # prisma
 backend/prisma/migrations/
 
-.env
+*.env
+
+#画像ファイル
+backend/uploads/
