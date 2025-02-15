@@ -31,7 +31,7 @@ const IncomeForm = () => {
 
     try {
       // 収入データをサーバーに送信
-      const response = await axios.post('http://localhost:5000/add-income', {
+      const response = await axios.post('http://localhost:5000/income/add-income', {
         source: selectedCategory,
         amount: income,
         date: date,
