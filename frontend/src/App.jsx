@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import ReceiptForm from './pages/ReceiptsForm';
 import IncomeForm from './pages/IncomeForm';
+import './App.css';
 
 function App() {
   return (
