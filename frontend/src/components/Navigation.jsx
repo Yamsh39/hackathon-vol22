@@ -21,7 +21,8 @@ function Navigation() {
               <Link className="nav-link text-dark" to="/receipt-income">収入</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/registration-history">登録履歴</Link>
+              <Link className="nav-link text-dark" to="/registration-history">登録履歴</Link> |
+        <Link to="/graph"> 収支グラフ </Link>
             </li>
           </ul>
         </div>

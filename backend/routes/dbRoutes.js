@@ -50,4 +50,47 @@ router.get('/registrations', async (req, res) => {
   }
 });
 
+// 月ごとの収支合計を取得
+router.get('/monthly-summary', async (req, res) => {
+  try {
+    // 月ごとの支出 (Receipt)
+    const expenses = await prisma.receipt.groupBy({
+      by: ['date'],
+      _sum: {
+        outcome: true,
+      },
+    });
+
+    // 月ごとの収入 (Income)
+    const incomes = await prisma.income.groupBy({
+      by: ['date'],
+      _sum: {
+        amount: true,
+      },
+    });
+
+    // 月ごとの収支をまとめる
+    const monthlySummary = expenses.map(expense => {
+      const month = expense.date.toISOString().split('T')[0].slice(0, 7); // YYYY-MM
+      const incomeForMonth = incomes.find(income => income.date.toISOString().split('T')[0].slice(0, 7) === month);
+
+      const totalIncome = incomeForMonth ? incomeForMonth._sum.amount : 0;
+      const totalExpense = expense._sum.outcome;
+      const balance = totalIncome - totalExpense;
+
+      return {
+        month,
+        total_expense: totalExpense,
+        total_income: totalIncome,
+        balance: balance,
+      };
+    });
+
+    res.json(monthlySummary);
+  } catch (error) {
+    console.error('Error fetching monthly summary:', error);
+    res.status(500).json({ error: 'Failed to fetch monthly summary' });
+  }
+});
+
 module.exports = router;
