@@ -24,10 +24,12 @@ const RegistrationHistory = () => {
       <ul>
         {registrations.map((registration) => (
           <li key={registration.receipt_id}>
-            <div>{registration.detail}</div>
+            <p>{registration.detail}</p> {/* detail プロパティを表示 */}
             <ul>
               {registration.items.map((item) => (
-                <li key={item.item_id}>{item.name} - {item.price}円</li> // 各アイテムを表示
+                <li key={item.item_id}>
+                  {item.name} - {item.price}円 - {item.quantity}個
+                </li>
               ))}
             </ul>
           </li>
