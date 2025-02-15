@@ -5,6 +5,7 @@ import About from './pages/About';
 import ReceiptForm from './pages/ReceiptsForm';
 import IncomeForm from './pages/IncomeForm';
 import RegistrationHistory from './pages/RegistrationHistory';
+import './App.css';
 
 function App() {
   return (

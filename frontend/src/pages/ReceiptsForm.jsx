@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { FaMoneyBillWave, FaUtensils, FaShoppingCart, FaTrain } from 'react-icons/fa';
+import styles from './Button.module.css';
 
 const ReceiptForm = () => {
   const [image, setImage] = useState(null);
@@ -104,31 +106,31 @@ const ReceiptForm = () => {
         <hr />
 
         {/* 支出カテゴリの選択 */}
-      <div className="flex space-x-4">
-        <button
-          type="button"
-          onClick={() => handleCategorySelect('食費')}
-          className={`px-4 py-2 border rounded-md ${selectedCategory === '食費' ? 'bg-blue-500 text-white' : 'bg-white'}`}
-        >
-          食費
-        </button>
-        <button
-          type="button"
-          onClick={() => handleCategorySelect('日用品')}
-          className={`px-4 py-2 border rounded-md ${selectedCategory === '日用品' ? 'bg-blue-500 text-white' : 'bg-white'}`}
-        >
-          日用品
-        </button>
-        <button
-          type="button"
-          onClick={() => handleCategorySelect('交通費')}
-          className={`px-4 py-2 border rounded-md ${selectedCategory === '交通費' ? 'bg-blue-500 text-white' : 'bg-white'}`}
-        >
-          交通費
-        </button>
-      </div>
-      <hr />
-      <br />
+        <div className="flex space-x-4">
+          <button
+            type="button"
+            onClick={() => handleCategorySelect('食費')}
+            className={`${styles.button} ${selectedCategory === '食費' ? styles.selected : ''}`}
+          >
+            <FaUtensils className={`${styles.icon} ${styles.food}`} /> 食費
+          </button>
+          <button
+            type="button"
+            onClick={() => handleCategorySelect('日用品')}
+            className={`${styles.button} ${selectedCategory === '日用品' ? styles.selected : ''}`}
+          >
+            <FaShoppingCart className={`${styles.icon} ${styles.household}`} /> 日用品
+          </button>
+          <button
+            type="button"
+            onClick={() => handleCategorySelect('交通費')}
+            className={`${styles.button} ${selectedCategory === '交通費' ? styles.selected : ''}`}
+          >
+            <FaTrain className={`${styles.icon} ${styles.transport}`} /> 交通費
+          </button>
+        </div>
+        <hr />
+        <br />
 
         <button
           type="submit"

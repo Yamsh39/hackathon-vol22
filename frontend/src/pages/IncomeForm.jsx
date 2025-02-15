@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { FaMoneyBillWave, FaRegCreditCard, FaCoins, FaBriefcase } from 'react-icons/fa';
+import styles from './Button.module.css';
 
 const IncomeForm = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -51,8 +53,8 @@ const IncomeForm = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* 日付の入力 */}
         <div>
-            <label className="block text-gray-700 font-medium">日付 </label>
-            <input
+          <label className="block text-gray-700 font-medium">日付 </label>
+          <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
@@ -71,7 +73,7 @@ const IncomeForm = () => {
             onChange={(e) => setIncome(e.target.value)} 
             className="border p-2 w-full rounded-md"
           />
-            円
+          円
         </div>
         <hr />
 
@@ -82,30 +84,30 @@ const IncomeForm = () => {
             <button
               type="button"
               onClick={() => handleCategorySelect('給料')}
-              className={`px-4 py-2 border rounded-md ${selectedCategory === '給料' ? 'bg-blue-500 text-white' : 'bg-white'}`}
+              className={`${styles.button} ${selectedCategory === '給料' ? styles.selected : ''}`}
             >
-              給料
+              <FaMoneyBillWave className={`${styles.icon} ${styles.salary}`} />給料
             </button>
             <button
               type="button"
               onClick={() => handleCategorySelect('おこづかい')}
-              className={`px-4 py-2 border rounded-md ${selectedCategory === 'おこづかい' ? 'bg-blue-500 text-white' : 'bg-white'}`}
+              className={`${styles.button} ${selectedCategory === 'おこづかい' ? styles.selected : ''}`}
             >
-              おこづかい
+              <FaCoins className={`${styles.icon} ${styles.gift}`} />おこづかい
             </button>
             <button
               type="button"
               onClick={() => handleCategorySelect('投資')}
-              className={`px-4 py-2 border rounded-md ${selectedCategory === '投資' ? 'bg-blue-500 text-white' : 'bg-white'}`}
+              className={`${styles.button} ${selectedCategory === '投資' ? styles.selected : ''}`}
             >
-              投資
+              <FaRegCreditCard className={`${styles.icon} ${styles.otherIncome}`} />投資
             </button>
             <button
               type="button"
-              onClick={() => handleCategorySelect('投資')}
-              className={`px-4 py-2 border rounded-md ${selectedCategory === '投資' ? 'bg-blue-500 text-white' : 'bg-white'}`}
+              onClick={() => handleCategorySelect('副業')}
+              className={`${styles.button} ${selectedCategory === '副業' ? styles.selected : ''}`}
             >
-              副業
+              <FaBriefcase className={`${styles.icon} ${styles.default}`} />副業
             </button>
           </div>
         </div>
