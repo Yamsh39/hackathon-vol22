@@ -113,5 +113,24 @@ router.delete('/registrations/:id', async (req, res) => {
   }
 });
 
+router.get('/total-assets', async (req, res) => {
+  try {
+    const totalIncome = await prisma.income.aggregate({
+      _sum: { amount: true },
+    });
+
+    const totalOutcome = await prisma.receipt.aggregate({
+      _sum: { outcome: true },
+    });
+
+    const totalAssets = (totalIncome._sum.amount || 0) - (totalOutcome._sum.outcome || 0);
+
+    res.json({ totalAssets });
+  } catch (error) {
+    console.error('Error fetching total assets:', error);
+    res.status(500).json({ error: 'Failed to fetch total assets' });
+  }
+});
+
 
 module.exports = router;
