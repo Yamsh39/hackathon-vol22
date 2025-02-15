@@ -26,7 +26,7 @@ cd hackathon-vol22
 ```bash
 cd frontend
 npm install
-npm install react-router-dom@6
+npm install react-router-dom@6 react-icons
 ```
 ```bash
 cd backend

@@ -5,6 +5,7 @@ import About from './pages/About';
 import ReceiptForm from './pages/ReceiptsForm';
 import IncomeForm from './pages/IncomeForm';
 import RegistrationHistory from './pages/RegistrationHistory';
+import PayPayCSVUploader from './pages/PayPayCSVUploader';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/receipt-registration" element={<ReceiptForm />} />
         <Route path="/receipt-income" element={<IncomeForm />} />
         <Route path="/registration-history" element={<RegistrationHistory />} />
+        <Route path="/submit-paypay" element={<PayPayCSVUploader />} />
       </Routes>
     </Router>
   );

@@ -8,7 +8,8 @@ function Navigation() {
         <Link to="/about"> About </Link> | 
         <Link to="/receipt-registration"> 支出 </Link> |
         <Link to="/receipt-income"> 収入 </Link> |
-        <Link to="/registration-history"> 登録履歴 </Link>
+        <Link to="/registration-history"> 登録履歴 </Link> | 
+        <Link to="/submit-paypay"> PayPay取引履歴アップロード </Link>
     </nav>
   );
 }

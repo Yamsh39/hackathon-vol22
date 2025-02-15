@@ -30,3 +30,14 @@ model Item {
   receipt_id Int
   receipt    Receipt  @relation(fields: [receipt_id], references: [receipt_id])
 }
+
+model PayPayTransaction {
+  transaction_id Int      @id @default(autoincrement())
+  store_name     String
+  date           DateTime
+  amount         Float
+  type           String
+  category       String
+  paypay_id      String
+  status         String
+}
