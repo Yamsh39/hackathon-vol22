@@ -30,3 +30,10 @@ model Item {
   receipt_id Int
   receipt    Receipt  @relation(fields: [receipt_id], references: [receipt_id])
 }
+
+model Income {
+  income_id Int      @id @default(autoincrement())
+  date      DateTime
+  amount    Float
+  source    String
+}
