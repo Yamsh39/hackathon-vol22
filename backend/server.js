@@ -16,11 +16,13 @@ app.use(cors());
 const ocrRoutes = require('./routes/ocrRoutes');
 const receiptRoutes = require('./routes/receiptRoutes');
 const geminiRoutes = require('./routes/geminiRoutes');
+const dbRoutes = require('./routes/dbRoutes'); // 新しいルートをインポート
 
 // ルートを適用
 app.use('/ocr', ocrRoutes);
 app.use('/receipts', receiptRoutes);
 app.use('/gemini', geminiRoutes);
+app.use('/db', dbRoutes); // 新しいルートを適用
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);

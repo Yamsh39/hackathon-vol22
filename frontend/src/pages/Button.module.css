@@ -1,0 +1,54 @@
+/* Button.module.css */
+
+.button {
+    font-weight: 350;
+    padding: 10px 20px;
+    border: 2px solid #d1d5db;  /* 外枠の基本スタイル（明るい灰色） */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+  
+.button:hover {
+    border-color: #9ca3af;  /* ホバー時に少し濃い灰色に変更 */
+    transform: scale(1.05);
+}
+  
+.button.selected {
+    border-color: #6b7280;  /* 選択時にさらに濃い灰色に変更 */
+}
+
+.icon {
+    margin-right: 8px;
+}
+
+/* 以下、他のカテゴリーのアイコンの色を追加 */
+.icon.food {
+    color: #34D399;
+}
+
+.icon.household {
+    color: #60A5FA; /* 日用品カテゴリーの色 */
+}
+  
+.icon.transport {
+    color: #FB923C; /* 交通費カテゴリーの色 */
+}
+
+.icon.salary {
+    color: #F59E0B; /* 給料 */
+}
+  
+.icon.gift {
+    color: #6EE7B7; /* プレゼント */
+}
+  
+.icon.otherIncome {
+    color: #A5B4FC; /* その他収入 */
+}
+  
+.icon.default {
+    color: #6B7280; /* デフォルトカラー */
+}
+
+  
