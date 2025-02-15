@@ -18,7 +18,7 @@ const ReceiptForm = () => {
     setError(null);
 
     try {
-      const response = await axios.get('http://localhost:5000/formatted_receipt');
+      const response = await axios.get('http://localhost:5000/gemini/formatted_receipt');
       setReceiptData(response.data);
     } catch (error) {
       setError('レシートデータの取得に失敗しました');
@@ -39,12 +39,12 @@ const ReceiptForm = () => {
 
     setLoading(true);
     setError(null);
-    
+
     const formData = new FormData();
     formData.append('image', image);
 
     try {
-      await axios.post('http://localhost:5000/extract-receipt', formData, {
+      await axios.post('http://localhost:5000/ocr/extract-receipt', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
@@ -61,19 +61,19 @@ const ReceiptForm = () => {
   return (
     <div className="p-6 max-w-lg mx-auto bg-white shadow-md rounded-lg">
       <h2 className="text-xl font-bold mb-4">🧾 レシート情報抽出</h2>
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-gray-700 font-medium">📷 画像をアップロード:</label>
-          <input 
-            type="file" 
-            onChange={handleImageChange} 
+          <input
+            type="file"
+            onChange={handleImageChange}
             className="mt-2 p-2 w-full border rounded-md"
           />
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           送信
