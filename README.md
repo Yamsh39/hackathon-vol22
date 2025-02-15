@@ -12,10 +12,6 @@
 - **データベース**: PostgreSQL
 - **コンテナ管理**: Docker, Docker Compose
 
-以下を実行してみてできなかったらchatGPTに聞いてみて
-```bash
-$ docker compose up --build
-```
 ## 環境構築
 
 ### 1. リポジトリをクローンする
@@ -30,6 +26,7 @@ cd hackathon-vol22
 ```bash
 cd frontend
 npm install
+npm install react-router-dom@6
 ```
 ```bash
 cd backend
