@@ -19,6 +19,24 @@ const geminiRoutes = require('./routes/geminiRoutes');
 const dbRoutes = require('./routes/dbRoutes');
 const incomeRoutes = require('./routes/incomeRoutes');
 
+// 月ごとの支出を取得するエンドポイントを追加
+app.get('/api/receipts/monthly-summary', async (req, res) => {
+  try {
+    const summary = await prisma.$queryRaw`
+      SELECT 
+        TO_CHAR("date", 'YYYY-MM') AS month,
+        SUM("outcome") AS total_expense
+      FROM "Receipt"
+      GROUP BY month
+      ORDER BY month;
+    `;
+    res.json(summary);
+  } catch (error) {
+    console.error('Error fetching monthly summary:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // ルートを適用
 app.use('/ocr', ocrRoutes);
 app.use('/receipts', receiptRoutes);

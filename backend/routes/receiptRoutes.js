@@ -1,5 +1,5 @@
 const express = require('express');
-const { createReceipt, getReceipts } = require('../services/receiptService');
+const { createReceipt, getReceipts, getMonthlySummary } = require('../services/receiptService');
 
 const router = express.Router();
 
@@ -18,6 +18,17 @@ router.get('/', async (req, res) => {
     res.json(receipts);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+// 月ごとの支出合計を取得するエンドポイント
+router.get('/monthly-summary', async (req, res) => {
+  try {
+    const summary = await getMonthlySummary();
+    res.json(summary);
+  } catch (error) {
+    console.error('Error fetching monthly summary:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
