@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 
 router.post('/save-receipt', async (req, res) => {
   const { store_name, date, items, total_price } = req.body;
-  console.log('date', date);
 
   try {
     const validDate = new Date(date.replace(/年|月/g, '-').replace(/日/g, ''));
@@ -33,6 +32,21 @@ router.post('/save-receipt', async (req, res) => {
   } catch (error) {
     console.error('DB保存エラー:', error);
     res.status(500).json({ error: 'DB保存に失敗しました' });
+  }
+});
+
+router.get('/registrations', async (req, res) => {
+  try {
+    const registrations = await prisma.receipt.findMany({
+      include: {
+        items: true,
+      },
+    });
+    console.log('registrations', registrations);
+    res.json(registrations);
+  } catch (error) {
+    console.error('Error fetching registrations:', error);
+    res.status(500).json({ error: 'Failed to fetch registrations' });
   }
 });
 
