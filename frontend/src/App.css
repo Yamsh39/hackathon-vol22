@@ -40,3 +40,25 @@
 .read-the-docs {
   color: #888;
 }
+
+/* ナビゲーションメニューが横並びに表示されるようにする */
+.navbar-nav {
+  display: flex;
+  gap: 20px;
+}
+
+/* スマートフォン用の調整 */
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: row; /* メニュー項目を横並びにする */
+    justify-content: center; /* 中央揃え */
+  }
+
+  .navbar-nav .nav-item {
+    margin-bottom: 10px; /* アイテム間に少しスペースを追加 */
+  }
+}
+
+body {
+  padding-top: 60px;
+}

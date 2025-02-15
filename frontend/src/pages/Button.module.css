@@ -18,6 +18,16 @@
     border-color: #6b7280;  /* 選択時にさらに濃い灰色に変更 */
 }
 
+.submit-button {
+    background-color: #808080 !important; /* 送信ボタンの背景色を灰色に */
+    color: white !important; /* テキストを白に設定 */
+}
+
+.submit-button:hover {
+    background-color: #A9A9A9; /* ホバー時に少し明るい灰色に */
+}
+
+
 .icon {
     margin-right: 8px;
 }
