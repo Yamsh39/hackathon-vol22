@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
 import { FaUtensils, FaShoppingCart, FaTrain } from 'react-icons/fa';
 import styles from './Button.module.css';
 
