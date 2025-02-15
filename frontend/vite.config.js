@@ -5,7 +5,13 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server: {
     host: '0.0.0.0',
-    port: 3000
+    port: process.env.PORT || 8080,
+  },
+  preview: {
+    allowedHosts: [
+      "hackathon-vol22-frontend-812851936222.asia-northeast1.run.app",
+      ".run.app" // 他の Cloud Run ホストも許可
+    ],
   },
   plugins: [react()]
 });
