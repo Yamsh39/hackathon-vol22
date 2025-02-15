@@ -32,10 +32,25 @@ const GraphPage = () => {
     labels: monthlyData.map(item => item.month), // 月
     datasets: [
       {
-        label: 'Total Expense',
+        label: '支出',
         data: monthlyData.map(item => item.total_expense), // 支出合計
+        borderColor: 'rgb(209, 27, 24)',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        fill: true,
+      },
+      {
+        label: '収入',
+        data: monthlyData.map(item => item.total_income), // 収入合計
         borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        
+        fill: true,
+      },
+      {
+        label: '合計支出',
+        data: monthlyData.map(item => item.balance), // 収支差額
+        borderColor: 'rgba(153, 102, 255, 1)',
+        backgroundColor: 'rgba(153, 102, 255, 0.2)',
         fill: true,
       },
     ],
@@ -43,7 +58,7 @@ const GraphPage = () => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false, // ✅ これを false にしないとサイズ調整できない
+    maintainAspectRatio: false, // これを false にしないとサイズ調整できない
   };
 
   return (
