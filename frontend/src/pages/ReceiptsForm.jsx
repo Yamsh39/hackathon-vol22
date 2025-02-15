@@ -58,6 +58,28 @@ const ReceiptForm = () => {
     }
   };
 
+  const saveToDatabase = async () => {
+    if (!receiptData) {
+      setError('レシートデータがありません');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      await axios.post('http://localhost:5000/db/save-receipt', receiptData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      alert('レシートデータがDBに登録されました');
+    } catch (error) {
+      setError('DB登録に失敗しました');
+      console.error('DB登録エラー:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="p-6 max-w-lg mx-auto bg-white shadow-md rounded-lg">
       <h2 className="text-xl font-bold mb-4">🧾 レシート情報抽出</h2>
@@ -94,6 +116,12 @@ const ReceiptForm = () => {
             ))}
           </ul>
           <p className="mt-3 text-lg font-bold">💰 合計金額: ¥{receiptData.total_price}</p>
+          <button
+            onClick={saveToDatabase}
+            className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+          >
+            DBに登録する
+          </button>
         </div>
       )}
     </div>
