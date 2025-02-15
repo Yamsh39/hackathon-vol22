@@ -93,4 +93,25 @@ router.get('/monthly-summary', async (req, res) => {
   }
 });
 
+router.delete('/registrations/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    // まず関連する Item を削除
+    await prisma.item.deleteMany({
+      where: { receipt_id: Number(id) }
+    });
+
+    // 次に Receipt を削除
+    const deletedRecord = await prisma.receipt.delete({
+      where: { receipt_id: Number(id) }
+    });
+
+    res.json({ message: 'Deleted successfully', deletedRecord });
+  } catch (error) {
+    console.error('Error deleting record:', error);
+    res.status(500).json({ error: 'Error deleting record' });
+  }
+});
+
+
 module.exports = router;
