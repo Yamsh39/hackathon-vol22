@@ -83,6 +83,14 @@ hackathon-vol22
 │   ├── prisma
 │   │   └── schema.prisma
 │   ├── uploads
+│   ├──routes
+│   │   ├──geminiRoutes.js
+|   |   ├──ocrRoutes.js
+│   │   └──receiptRoutes.js
+│   ├──services
+│   │   ├──geminiRoutes.js
+|   |   ├──ocrRoutes.js
+│   │   └──receiptRoutes.js
 │   ├── .env
 │   ├── .gitignore
 │   ├── Dockerfile

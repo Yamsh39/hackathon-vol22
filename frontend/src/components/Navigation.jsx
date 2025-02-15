@@ -5,8 +5,11 @@ function Navigation() {
   return (
     <nav>
         <Link to="/"> Home </Link> |
-        <Link to="/about"> About </Link> | 
-        <Link to="/receipt-registration"> receipt registration </Link> | 
+        <Link to="/calendar"> カレンダー </Link> | 
+        <Link to="/receipt-registration"> 支出 </Link> |
+        <Link to="/receipt-income"> 収入 </Link> |
+        <Link to="/registration-history"> 登録履歴 </Link> |
+        <Link to="/graph"> 収支グラフ </Link>
     </nav>
   );
 }
