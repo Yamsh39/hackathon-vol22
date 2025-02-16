@@ -85,7 +85,7 @@ const RegistrationHistory = () => {
         style={{
           backgroundColor: '#4CAF50', // ボタンの背景色
           color: 'white', // ボタンの文字色
-          padding: '10px 20px',
+          padding: '5px 10px',
           border: 'none',
           borderRadius: '5px',
           cursor: 'pointer',
@@ -100,7 +100,7 @@ const RegistrationHistory = () => {
         style={{
           backgroundColor: selectedIds.size === 0 ? '#ccc' : '#f44336', // 無効な場合は灰色、削除時は赤色
           color: 'white',
-          padding: '10px 20px',
+          padding: '5px 10px',
           border: 'none',
           borderRadius: '5px',
           cursor: selectedIds.size === 0 ? 'not-allowed' : 'pointer',
@@ -114,7 +114,7 @@ const RegistrationHistory = () => {
         style={{
           backgroundColor: '#4CAF50', // ボタンの背景色
           color: 'white',
-          padding: '10px 20px',
+          padding: '5px 10px',
           border: 'none',
           borderRadius: '5px',
           cursor: 'pointer',
@@ -129,7 +129,7 @@ const RegistrationHistory = () => {
             onClick={() => handleItemClick(registration.receipt_id)}
             style={{
               border: '1px solid #ccc',
-              padding: '10px',
+              padding: '5px',
               borderRadius: '8px',
               backgroundColor: selectedIds.has(registration.receipt_id) ? '#c0f0ef' : '#f9f9f9', // 選択された項目の背景色
               cursor: 'pointer', // クリック可能にする
