@@ -194,4 +194,25 @@ router.get('/category-summary', async (req, res) => {
   }
 });
 
+router.get('/recent-items/:category', async (req, res) => {
+  const category = decodeURIComponent(req.params.category);
+  console.log('category', category);
+  try {
+    const recentItems = await prisma.item.findMany({
+      where: { category },
+      orderBy: { receipt: { date: 'desc' } }, // receiptのdateでソート
+      take: 3,
+      include: {
+        receipt: {
+          select: { date: true } // dateを選択
+        }
+      }
+    });
+    res.json(recentItems);
+  } catch (error) {
+    console.error('Error fetching recent items:', error);
+    res.status(500).json({ error: 'Failed to fetch recent items' });
+  }
+});
+
 module.exports = router;
