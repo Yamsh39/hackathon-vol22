@@ -1,31 +1,38 @@
+/* アクティブリンクのスタイル */
 .active {
   color: red !important;
   font-weight: bold;
-} 
+}
 
+/* ナビゲーションバーのカスタムスタイル */
 .customNavbar {
   background-color: #fef6d1;  /* 薄い黄色 */
   border-bottom: 2px solid #f1d19f;  /* 薄いゴールドのボーダー */
 }
 
+/* ナビゲーションリンクのスタイル */
 .navLink {
   color: #3c3c3c;  /* ダークグレー */
   transition: color 0.3s ease;
 }
 
+/* ホバー時のリンク色 */
 .navLinkHover:hover {
-  color: #f19c42;  /* ホバー時にオレンジ色 */
+  color: #f19c42;  /* オレンジ色 */
 }
 
+/* ブランド名のスタイル */
 .navbarBrand {
   color: #2c2c2c;  /* ダークカラー */
   font-family: 'Arial', sans-serif;  /* フォント変更 */
 }
 
+/* ブランド名ホバー時の色 */
 .navbarBrandHover:hover {
-  color: #f19c42;  /* ホバー時にオレンジ色 */
+  color: #f19c42;  /* オレンジ色 */
 }
 
+/* ハンバーガーメニューのスタイル */
 .navbarToggler {
   background-color: transparent;  /* 初期背景色 */
 }
@@ -34,6 +41,78 @@
   background-color: #f19c42;  /* オレンジ色 */
 }
 
+/* ボトムボーダーのスタイル */
 .border-bottom-thick {
   border-bottom: 3px solid black;
+}
+
+/* モーダルボタン */
+.openModalBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #f19c42;  /* オレンジ色 */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.openModalBtn:hover {
+  background-color: #d78c2f;  /* 少し暗くしたオレンジ色 */
+  transform: translateY(-3px);  /* ホバー時にボタンが少し上に移動 */
+}
+
+/* モーダルの背景 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* モーダルの内容 */
+.modalContent {
+  background-color: #fff8e1;  /* 薄い黄色背景 */
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* モーダル内の閉じるボタン */
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 50px;
+  color: #f19c42;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.closeBtn:hover {
+  color: #d78c2f;  /* 少し暗くしたオレンジ色 */
+}
+
+/* 支出がある日の背景色 */
+.expenseDay {
+  background-color: red !important;
+  color: white !important;
+}
+
+/* 支出がある日のホバー時 */
+.expense-day:hover {
+  background-color: #d78c2f; /* 少し暗くしたオレンジ色 */
 }
