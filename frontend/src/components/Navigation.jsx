@@ -74,7 +74,7 @@ function Navigation() {
   // 支出がある日を赤くする
   const highlightExpenseDays = ({ date }) => {
     const eventDate = formatDate(date);
-    return expense[eventDate] > 0 ? 'expense-day' : null;
+    return expense[eventDate] > 0 ? styles.expenseDay : '';
   };
 
   // 選択した日付の支出を表示
@@ -92,6 +92,13 @@ function Navigation() {
   // モーダルを開閉する関数
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  // モーダルの背景をクリックしたときにモーダルを閉じる関数
+  const handleModalBackgroundClick = (e) => {
+    if (e.target === e.currentTarget) {
+      toggleModal();
+    }
   };
 
   return (
@@ -145,8 +152,8 @@ function Navigation() {
 
       {/* モーダル */}
       {isModalOpen && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
+        <div className={styles.modal} onClick={handleModalBackgroundClick}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <span className={styles.closeBtn} onClick={toggleModal}>×</span>
             <h2>📅 収支カレンダー</h2>
 

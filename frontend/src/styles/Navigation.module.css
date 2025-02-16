@@ -94,9 +94,9 @@
 /* モーダル内の閉じるボタン */
 .closeBtn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
+  top: 20px;
+  right: 20px;
+  font-size: 50px;
   color: #f19c42;
   cursor: pointer;
   font-weight: bold;
@@ -104,4 +104,15 @@
 
 .closeBtn:hover {
   color: #d78c2f;  /* 少し暗くしたオレンジ色 */
+}
+
+/* 支出がある日の背景色 */
+.expenseDay {
+  background-color: red !important;
+  color: white !important;
+}
+
+/* 支出がある日のホバー時 */
+.expense-day:hover {
+  background-color: #d78c2f; /* 少し暗くしたオレンジ色 */
 }
