@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaMoneyBillWave, FaRegCreditCard, FaCoins, FaBriefcase } from 'react-icons/fa';
-import styles from './Button.module.css';
+import styles from '../styles/Button.module.css';
 
 const IncomeForm = () => {
   const [selectedCategory, setSelectedCategory] = useState('');

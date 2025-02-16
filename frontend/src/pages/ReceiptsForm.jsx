@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { FaUtensils, FaShoppingCart, FaGamepad, FaLightbulb, FaPiggyBank, FaFileInvoice, FaEllipsisH } from 'react-icons/fa';
-import styles from './Button.module.css';
+import styles from '../styles/Button.module.css';
 
 const ReceiptForm = () => {
   const [image, setImage] = useState(null);

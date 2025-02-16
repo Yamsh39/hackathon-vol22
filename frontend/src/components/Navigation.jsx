@@ -39,6 +39,9 @@ function Navigation() {
               <Link className="nav-link text-dark" to="/registration-history">登録履歴</Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link text-dark" to="/income-history">収入履歴</Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link text-dark" to="/graph">収支グラフ</Link>
             </li>
           </ul>
