@@ -92,7 +92,6 @@ router.get('/monthly-summary', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch monthly summary' });
   }
 });
-
 // 日ごとの収支合計を取得
 router.get('/daily-summary', async (req, res) => {
   try {
@@ -140,5 +139,44 @@ router.get('/daily-summary', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch daily summary' });
   }
 })
+router.delete('/registrations/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    // まず関連する Item を削除
+    await prisma.item.deleteMany({
+      where: { receipt_id: Number(id) }
+    });
+
+    // 次に Receipt を削除
+    const deletedRecord = await prisma.receipt.delete({
+      where: { receipt_id: Number(id) }
+    });
+
+    res.json({ message: 'Deleted successfully', deletedRecord });
+  } catch (error) {
+    console.error('Error deleting record:', error);
+    res.status(500).json({ error: 'Error deleting record' });
+  }
+});
+
+router.get('/total-assets', async (req, res) => {
+  try {
+    const totalIncome = await prisma.income.aggregate({
+      _sum: { amount: true },
+    });
+
+    const totalOutcome = await prisma.receipt.aggregate({
+      _sum: { outcome: true },
+    });
+
+    const totalAssets = (totalIncome._sum.amount || 0) - (totalOutcome._sum.outcome || 0);
+
+    res.json({ totalAssets });
+  } catch (error) {
+    console.error('Error fetching total assets:', error);
+    res.status(500).json({ error: 'Failed to fetch total assets' });
+  }
+});
+
 
 module.exports = router;
