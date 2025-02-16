@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from '../styles/RegistrationHistory.module.css';  // モジュールスタイルとしてインポート
 
 const RegistrationHistory = () => {
   const [registrations, setRegistrations] = useState([]);
@@ -21,8 +20,8 @@ const RegistrationHistory = () => {
     fetchRegistrations();
   }, []);
 
-  // チェックボックスの変更処理
-  const handleCheckboxChange = (receiptId) => {
+  // アイテムのクリックで選択・解除
+  const handleItemClick = (receiptId) => {
     setSelectedIds((prevSelected) => {
       const newSelected = new Set(prevSelected);
       if (newSelected.has(receiptId)) {
@@ -81,39 +80,62 @@ const RegistrationHistory = () => {
   return (
     <div className="container">
       <h1>登録履歴</h1>
-      <button className={styles.selectButton} onClick={handleSelectAll}>
+      <button
+        onClick={handleSelectAll}
+        style={{
+          backgroundColor: '#4CAF50', // ボタンの背景色
+          color: 'white', // ボタンの文字色
+          padding: '10px 20px',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          marginRight: '10px', // ボタン間の間隔
+        }}
+      >
         {selectedIds.size === registrations.length ? '全選択解除' : '全選択'}
       </button>
       <button
-        className={styles.deleteButton}
         onClick={handleDeleteSelected}
         disabled={selectedIds.size === 0}
+        style={{
+          backgroundColor: selectedIds.size === 0 ? '#ccc' : '#f44336', // 無効な場合は灰色、削除時は赤色
+          color: 'white',
+          padding: '10px 20px',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: selectedIds.size === 0 ? 'not-allowed' : 'pointer',
+          marginRight: '10px',
+        }}
       >
         選択したレコードを削除
       </button>
-      <button className={styles.sortButton} onClick={toggleSortOrder}>
+      <button
+        onClick={toggleSortOrder}
+        style={{
+          backgroundColor: '#4CAF50', // ボタンの背景色
+          color: 'white',
+          padding: '10px 20px',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+      >
         {sortOrder === 'asc' ? '新しい順に並べ替え' : '古い順に並べ替え'}
       </button>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
         {registrations.map((registration) => (
           <div
             key={registration.receipt_id}
+            onClick={() => handleItemClick(registration.receipt_id)}
             style={{
               border: '1px solid #ccc',
               padding: '10px',
               borderRadius: '8px',
-              backgroundColor: selectedIds.has(registration.receipt_id) ? '#c0f0ef' : '#f9f9f9', // チェックされたアイテムの背景色
-              transition: 'background-color 0.3s ease', // 背景色変更時にスムーズな遷移を追加
+              backgroundColor: selectedIds.has(registration.receipt_id) ? '#c0f0ef' : '#f9f9f9', // 選択された項目の背景色
+              cursor: 'pointer', // クリック可能にする
             }}
           >
-            <div style={{ marginBottom: '10px' }}>
-              <input
-                type="checkbox"
-                checked={selectedIds.has(registration.receipt_id)}
-                onChange={() => handleCheckboxChange(registration.receipt_id)}
-              />
-              <p style={{ display: 'inline', marginLeft: '10px' }}>{registration.detail}</p>
-            </div>
+            <p style={{ marginBottom: '10px' }}>{registration.detail}</p>
             <p style={{ fontWeight: 'bold' }}>
               日付: {new Date(registration.date).toLocaleDateString()}
             </p>
@@ -129,7 +151,7 @@ const RegistrationHistory = () => {
                     backgroundColor: '#f3f3f3',
                   }}
                 >
-                  {item.name} {item.price}円 {item.quantity}個
+                  {item.name} ・ {item.price}円 ・ {item.quantity}個
                 </li>
               ))}
             </ul>
