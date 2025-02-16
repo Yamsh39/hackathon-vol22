@@ -98,7 +98,7 @@ const RegistrationHistory = () => {
               border: '1px solid #ccc',
               padding: '10px',
               borderRadius: '8px',
-              backgroundColor: '#f9f9f9',
+              backgroundColor: selectedIds.has(registration.receipt_id) ? '#c0f0ef' : '#f9f9f9', // チェックされたアイテムの背景色
             }}
           >
             <div style={{ marginBottom: '10px' }}>
@@ -112,7 +112,7 @@ const RegistrationHistory = () => {
             <p style={{ fontWeight: 'bold' }}>
               日付: {new Date(registration.date).toLocaleDateString()}
             </p>
-            <ul style={{ paddingLeft: '20px' }}>
+            <ul style={{ paddingLeft: '20px', listStyleType: 'none' }}>
               {registration.items.map((item) => (
                 <li
                   key={item.item_id}
@@ -124,7 +124,7 @@ const RegistrationHistory = () => {
                     backgroundColor: '#f3f3f3',
                   }}
                 >
-                  {item.name} ・ {item.price}円 ・ {item.quantity}個
+                  {item.name} {item.price}円 {item.quantity}個
                 </li>
               ))}
             </ul>
