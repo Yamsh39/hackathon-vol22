@@ -105,7 +105,10 @@ function Navigation() {
     <nav className={`navbar navbar-expand-md ${styles.customNavbar} border-bottom shadow-sm fixed-top`}>
       <div className="container">
         {/* ブランド名 */}
-        <Link className={`navbar-brand fw-bold ${styles.navbarBrand} ${styles.navbarBrandHover}`} to="/">Smart Stack</Link>
+        <Link className={`navbar-brand fw-bold ${styles.navbarBrand} ${styles.navbarBrandHover}`} to="/">
+          <i className="fas fa-user" style={{ marginRight: '8px' }}></i> {/* 人のアイコン */}
+          Smart Stack
+        </Link>
 
         {/* ハンバーガーメニュー（モバイル用） */}
         <button

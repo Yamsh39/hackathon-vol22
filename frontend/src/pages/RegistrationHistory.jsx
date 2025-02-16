@@ -107,7 +107,7 @@ const RegistrationHistory = () => {
           marginRight: '10px',
         }}
       >
-        選択したレコードを削除
+        削除
       </button>
       <button
         onClick={toggleSortOrder}
