@@ -1,110 +1,108 @@
-import React, { useState } from 'react';
-import ReactCalendar from 'react-calendar'; // カレンダーコンポーネント
-import 'react-calendar/dist/Calendar.css'; // カレンダーのスタイル
+import React, { useState, useEffect } from 'react';
+import ReactCalendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import axios from 'axios';
+import '../styles/Calendar.css'; // 追加（カスタムスタイル）
 
 const Calendar = () => {
   const [date, setDate] = useState(new Date());
-  const [events, setEvents] = useState({});  // 日付ごとの収支イベント
-  const [income, setIncome] = useState({});  // 日付ごとの収入
-  const [expense, setExpense] = useState({});  // 日付ごとの支出
+  const [expense, setExpense] = useState({});
+  const [monthlySummary, setMonthlySummary] = useState({ incomeTotal: 0, expenseTotal: 0 });
 
-  // 日付が変更されたとき
-  const onChange = (newDate) => {
-    setDate(newDate);
+  // 日付フォーマット関数（YYYY-MM-DD）
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   };
 
-  // 収支データを追加する
-  const addTransaction = (date, type, amount) => {
-    const eventDate = date.toLocaleDateString(); // 日付を文字列化
-    const transaction = { type, amount };
+  // カレンダーの日付変更時の処理
+  const onChange = (newDate) => {
+    setDate(new Date(newDate));
+  };
 
-    if (type === 'income') {
-      setIncome({
-        ...income,
-        [eventDate]: [...(income[eventDate] || []), transaction],
+  // 日ごとの支出データ取得
+  const fetchDailyExpenses = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/db/daily-summary'); // 日ごとのデータ取得
+      const dailyData = response.data;
+      const expenseData = {};
+
+      dailyData.forEach((data) => {
+        const transactionDate = data.day; // YYYY-MM-DD
+        if (!expenseData[transactionDate]) expenseData[transactionDate] = 0;
+        expenseData[transactionDate] += data.total_expense;
       });
-    } else if (type === 'expense') {
-      setExpense({
-        ...expense,
-        [eventDate]: [...(expense[eventDate] || []), transaction],
-      });
+
+      setExpense(expenseData);
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
     }
   };
 
-  // 特定の日付の収支を表示
-  const renderTransactions = (date) => {
-    const eventDate = date.toLocaleDateString();
-    const dailyIncome = income[eventDate] || [];
-    const dailyExpense = expense[eventDate] || [];
+  // 月ごとの収支データ取得
+  const fetchMonthlySummary = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/db/monthly-summary'); // 月ごとのデータ取得
+      const monthlyData = response.data;
+      const currentMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      const summary = monthlyData.find((m) => m.month === currentMonth);
 
-    const totalIncome = dailyIncome.reduce((acc, curr) => acc + curr.amount, 0);
-    const totalExpense = dailyExpense.reduce((acc, curr) => acc + curr.amount, 0);
+      if (summary) {
+        setMonthlySummary({
+          incomeTotal: summary.total_income,
+          expenseTotal: summary.total_expense,
+        });
+      } else {
+        setMonthlySummary({ incomeTotal: 0, expenseTotal: 0 });
+      }
+    } catch (error) {
+      console.error('Error fetching monthly summary:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDailyExpenses();
+    fetchMonthlySummary();
+  }, [date]);
+
+  // 支出がある日を赤くする
+  const highlightExpenseDays = ({ date }) => {
+    const eventDate = formatDate(date);
+    return expense[eventDate] > 0 ? 'expense-day' : null;
+  };
+
+  // 選択した日付の支出を表示
+  const renderTransactions = (selectedDate) => {
+    const eventDate = formatDate(selectedDate);
+    const totalExpense = expense[eventDate] || 0;
 
     return (
       <div>
-        <h3>収入: ¥{totalIncome}</h3>
-        <ul>
-          {dailyIncome.map((e, index) => (
-            <li key={index}>収入: ¥{e.amount}</li>
-          ))}
-        </ul>
         <h3>支出: ¥{totalExpense}</h3>
-        <ul>
-          {dailyExpense.map((e, index) => (
-            <li key={index}>支出: ¥{e.amount}</li>
-          ))}
-        </ul>
       </div>
     );
   };
-
-  // 月ごとの収支を集計
-  const calculateMonthlySummary = () => {
-    const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-    const endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
-    const incomeTotal = Object.keys(income).reduce((acc, currDate) => {
-      const curr = new Date(currDate);
-      if (curr >= startDate && curr <= endDate) {
-        const dailyIncome = income[currDate].reduce((acc, curr) => acc + curr.amount, 0);
-        return acc + dailyIncome;
-      }
-      return acc;
-    }, 0);
-
-    const expenseTotal = Object.keys(expense).reduce((acc, currDate) => {
-      const curr = new Date(currDate);
-      if (curr >= startDate && curr <= endDate) {
-        const dailyExpense = expense[currDate].reduce((acc, curr) => acc + curr.amount, 0);
-        return acc + dailyExpense;
-      }
-      return acc;
-    }, 0);
-
-    return { incomeTotal, expenseTotal };
-  };
-
-  const { incomeTotal, expenseTotal } = calculateMonthlySummary();
 
   return (
     <div className="calendar-page">
       <h1>📅 収支カレンダー</h1>
       <div className="calendar-container">
-        {/* react-calendar を表示 */}
-        <ReactCalendar onChange={onChange} value={date} />
+        <ReactCalendar 
+          onChange={onChange} 
+          value={date} 
+          tileClassName={highlightExpenseDays} // 追加（支出がある日を赤くする）
+        />
 
-        {/* 選択した日付の収支 */}
         <div className="event-details">
-          <h2>{date.toLocaleDateString()} の収支</h2>
+          <h2>{formatDate(date)} の支出</h2>
           {renderTransactions(date)}
         </div>
 
-        {/* 月ごとの収支サマリー */}
         <div className="monthly-summary">
           <h2>{date.getFullYear()}年 {date.getMonth() + 1}月の収支</h2>
-          <p>収入合計: ¥{incomeTotal}</p>
-          <p>支出合計: ¥{expenseTotal}</p>
-          <p>差額: ¥{incomeTotal - expenseTotal}</p>
+          <p>収入合計: ¥{monthlySummary.incomeTotal}</p>
+          <p>支出合計: ¥{monthlySummary.expenseTotal}</p>
+          <p>差額: ¥{monthlySummary.incomeTotal - monthlySummary.expenseTotal}</p>
         </div>
       </div>
     </div>

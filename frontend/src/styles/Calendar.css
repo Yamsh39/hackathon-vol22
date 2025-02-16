@@ -1,0 +1,23 @@
+/* 支出がある日のセルを赤くする */
+.expense-day {
+    background-color: rgba(255, 0, 0, 0.3) !important; /* 薄い赤 */
+    border-radius: 50%;
+  }
+  
+  /* カレンダーの基本スタイル調整 */
+  .calendar-page {
+    text-align: center;
+  }
+  
+  .calendar-container {
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  /* クリックした日を強調 */
+  .react-calendar__tile--active {
+    background-color: rgba(0, 0, 255, 0.3) !important; /* 青 */
+    color: white;
+    border-radius: 50%;
+  }
+  

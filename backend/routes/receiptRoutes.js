@@ -32,4 +32,14 @@ router.get('/monthly-summary', async (req, res) => {
   }
 });
 
+router.get('/daily-summary', async (req, res) => {
+  try {
+    const dailySummary = await getDailySummary();
+    res.json(dailySummary);
+  } catch (error) {
+    console.error('Error fetching daily summary:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 module.exports = router;

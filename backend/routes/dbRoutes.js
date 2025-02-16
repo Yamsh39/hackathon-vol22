@@ -93,4 +93,52 @@ router.get('/monthly-summary', async (req, res) => {
   }
 });
 
+// 日ごとの収支合計を取得
+router.get('/daily-summary', async (req, res) => {
+  try {
+    // 日ごとの支出 (Receipt)
+    const expenses = await prisma.receipt.groupBy({
+      by: ['date'],
+      _sum: {
+        outcome: true,
+      },
+    });
+
+    // 日ごとの収入 (Income)
+    const incomes = await prisma.income.groupBy({
+      by: ['date'],
+      _sum: {
+        amount: true,
+      },
+    });
+
+    // 日ごとの収支をまとめる
+    const dailySummary = expenses.map(expense => {
+      // 日付を 'YYYY-MM-DD' 形式に変換
+      const day = expense.date.toISOString().split('T')[0]; // YYYY-MM-DD
+      // 収入を日付で取得
+      const incomeForDay = incomes.find(income => {
+        const incomeDate = new Date(income.date); // 日付型に変換
+        return incomeDate.toISOString().split('T')[0] === day; // 比較
+      });
+
+      const totalIncome = incomeForDay ? incomeForDay._sum.amount : 0;
+      const totalExpense = expense._sum.outcome;
+      const balance = totalIncome - totalExpense;
+
+      return {
+        day,
+        total_expense: totalExpense,
+        total_income: totalIncome,
+        balance: balance,
+      };
+    });
+
+    res.json(dailySummary);
+  } catch (error) {
+    console.error('Error fetching daily summary:', error);
+    res.status(500).json({ error: 'Failed to fetch daily summary' });
+  }
+})
+
 module.exports = router;
