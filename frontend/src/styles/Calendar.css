@@ -1,23 +1,89 @@
 /* 支出がある日のセルを赤くする */
 .expense-day {
-    background-color: rgba(255, 0, 0, 0.3) !important; /* 薄い赤 */
-    border-radius: 50%;
-  }
-  
-  /* カレンダーの基本スタイル調整 */
-  .calendar-page {
-    text-align: center;
-  }
-  
-  .calendar-container {
-    display: inline-block;
-    margin-top: 20px;
-  }
-  
-  /* クリックした日を強調 */
-  .react-calendar__tile--active {
-    background-color: rgba(0, 0, 255, 0.3) !important; /* 青 */
-    color: white;
-    border-radius: 50%;
-  }
-  
+  background-color: rgba(255, 0, 0, 0.3) !important; /* 薄い赤 */
+  border-radius: 50%;
+  transition: background-color 0.3s ease; /* 背景色のアニメーション */
+}
+
+/* カレンダーの基本スタイル調整 */
+.calendar-page {
+  text-align: center;
+  font-family: 'Roboto', sans-serif; /* フォントを変更 */
+}
+
+.calendar-container {
+  display: inline-block;
+  margin-top: 20px;
+  border-radius: 12px; /* カレンダーの角を丸くする */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* カレンダーに影をつける */
+  background-color: #ffffff; /* 白背景 */
+  padding: 20px;
+}
+
+/* クリックした日を強調 */
+.react-calendar__tile--active {
+  background-color: rgba(0, 0, 255, 0.3) !important; /* 青 */
+  color: white;
+  border-radius: 50%;
+  transform: scale(1.1); /* クリックした日を少し拡大 */
+  transition: transform 0.2s ease; /* 拡大時のアニメーション */
+}
+
+/* 日ごとの支出の表示エリアを四角で囲む */
+.event-details, .monthly-summary {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* カードのような影をつける */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* エフェクトのアニメーション */
+}
+
+/* ホバーで浮き上がる効果 */
+.event-details:hover, .monthly-summary:hover {
+  transform: translateY(-5px); /* 上に浮かせる */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* より強い影 */
+}
+
+/* 文字のスタイル */
+h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #555;
+}
+
+h3 {
+  font-size: 1.3rem;
+  color: #444;
+}
+
+.monthly-summary {
+  margin-top: 30px;
+}
+
+/* カレンダー内の日付のスタイル */
+.react-calendar__tile {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.react-calendar__tile:hover {
+  background-color: rgba(0, 0, 255, 0.1);
+  transform: scale(1.05); /* 日付をホバー時に拡大 */
+}
+
+/* タイトル部分 */
+.calendar-page h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+

@@ -1,0 +1,91 @@
+/* 全体のレイアウト */
+.registration-history-container {
+  font-family: 'Roboto', sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* タイトル */
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ボタンのスタイル */
+button {
+  background-color: rgb(14, 202, 117);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* レコードカードのスタイル */
+.registration-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registration-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* チェックボックス */
+.registration-card input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* 日付のスタイル */
+.registration-card p {
+  margin: 10px 0;
+}
+
+.registration-card .date {
+  font-weight: bold;
+  color: #444;
+}
+
+/* アイテムリストのスタイル */
+.item-list {
+  padding-left: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.item-list li {
+  border: 1px solid #ddd;
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* アイテムリストの価格部分のスタイル */
+.item-list li span {
+  font-weight: bold;
+  color: #2e8b57;
+}
