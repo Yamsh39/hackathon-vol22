@@ -1,4 +1,8 @@
-/* Navigation.module.css */
+.active {
+  color: red !important;
+  font-weight: bold;
+} 
+
 .customNavbar {
   background-color: #fef6d1;  /* 薄い黄色 */
   border-bottom: 2px solid #f1d19f;  /* 薄いゴールドのボーダー */
