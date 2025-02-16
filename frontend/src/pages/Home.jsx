@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../styles/Home.css';
 
 const Home = () => {
   const [totalAssets, setTotalAssets] = useState(null);
@@ -30,18 +29,21 @@ const Home = () => {
   }, []);
 
   const getBaloonSize = (price) => {
-    const minSize = 50;
-    const maxSize = 200;
+    const minSize = 100;
+    const maxSize = 300;
     const maxPrice = Math.max(...categorySummary.map(category => category._sum.price));
     return minSize + (maxSize - minSize) * (price / maxPrice);
   };
 
   const getBaloonColor = (category) => {
     const colors = {
-      食費: '#FFB6C1',
-      交通費: '#ADD8E6',
-      娯楽費: '#90EE90',
-      その他: '#D3D3D3',
+      食費: '#FF6347', // Tomato
+      日用品: '#FFD700', // Gold
+      趣味: '#32CD32', // LimeGreen
+      水道光熱費: '#FF4500', // OrangeRed
+      貯金投資: '#4682B4', // SteelBlue
+      税金保険: '#1E90FF', // DodgerBlue
+      その他: '#D3D3D3', // LightGray
     };
     return colors[category] || '#F0F0F0';
   };
