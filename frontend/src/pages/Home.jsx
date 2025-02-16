@@ -8,6 +8,7 @@ const Home = () => {
   const [categorySummary, setCategorySummary] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null); // 新しい状態を追加
   const [isAnimating, setIsAnimating] = useState(false); // アニメーション状態を追加
+  const [showTotalAssets, setShowTotalAssets] = useState(false); // 総資産額の表示状態を追加
 
   useEffect(() => {
     const fetchTotalAssets = async () => {
@@ -71,10 +72,16 @@ const Home = () => {
     setSelectedCategory(null);
   };
 
+  const toggleTotalAssets = () => {
+    setShowTotalAssets(!showTotalAssets);
+  };
+
   return (
     <>
       <div className="container">
-        <h2>総資産額: {totalAssets !== null ? `${totalAssets} 円` : 'データ取得中...'}</h2>
+        <h2 onClick={toggleTotalAssets} style={{ cursor: 'pointer' }}>
+          総資産額: {showTotalAssets ? `${totalAssets !== null ? `${totalAssets.toLocaleString()} 円` : 'データ取得中...'}` : '*****円'}
+        </h2>
         <h3 style={{ padding: '30px 0' }}>今月の支出</h3>
         <div className='baloonSet'>
           {categorySummary.map((category, index) => (
