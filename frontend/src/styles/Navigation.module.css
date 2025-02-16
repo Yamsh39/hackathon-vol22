@@ -29,3 +29,7 @@
 .navbarToggler:hover {
   background-color: #f19c42;  /* オレンジ色 */
 }
+
+.border-bottom-thick {
+  border-bottom: 3px solid black;
+}

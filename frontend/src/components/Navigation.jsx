@@ -1,7 +1,9 @@
-import { Link } from 'react-router-dom';
 import styles from '../styles/Navigation.module.css';
+import { Link, useLocation } from 'react-router-dom';
 
 function Navigation() {
+  const location = useLocation();
+
   return (
     <nav className={`navbar navbar-expand-md ${styles.customNavbar} border-bottom shadow-sm fixed-top`}>
       <div className="container">

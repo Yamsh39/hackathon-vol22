@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../styles/RegistrationHistory.module.css';
 
 const RegistrationHistory = () => {
   const [registrations, setRegistrations] = useState([]);
   const [selectedIds, setSelectedIds] = useState(new Set());
+  const [sortOrder, setSortOrder] = useState('asc'); // 昇順/降順の状態
 
   useEffect(() => {
     const fetchRegistrations = async () => {
@@ -57,34 +59,78 @@ const RegistrationHistory = () => {
     }
   };
 
+  // 日付で並べ替え
+  const sortRegistrations = (order) => {
+    const sortedRegistrations = [...registrations].sort((a, b) => {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+
+      return order === 'asc' ? dateA - dateB : dateB - dateA;
+    });
+
+    setRegistrations(sortedRegistrations);
+  };
+
+  // 並べ替えボタンのクリック処理
+  const toggleSortOrder = () => {
+    const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+    setSortOrder(newSortOrder);
+    sortRegistrations(newSortOrder);
+  };
+
   return (
-    <div>
-      <h1>Registration History</h1>
+    <div className="container">
+      <h1>登録履歴</h1>
       <button onClick={handleSelectAll}>
         {selectedIds.size === registrations.length ? '全選択解除' : '全選択'}
       </button>
       <button onClick={handleDeleteSelected} disabled={selectedIds.size === 0}>
         選択したレコードを削除
       </button>
-      <ul>
+      <button onClick={toggleSortOrder}>
+        {sortOrder === 'asc' ? '新しい順に並べ替え' : '古い順に並べ替え'}
+      </button>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
         {registrations.map((registration) => (
-          <li key={registration.receipt_id}>
-            <input
-              type="checkbox"
-              checked={selectedIds.has(registration.receipt_id)}
-              onChange={() => handleCheckboxChange(registration.receipt_id)}
-            />
-            <p>{registration.detail}</p>
-            <ul>
+          <div
+            key={registration.receipt_id}
+            style={{
+              border: '1px solid #ccc',
+              padding: '10px',
+              borderRadius: '8px',
+              backgroundColor: '#f9f9f9',
+            }}
+          >
+            <div style={{ marginBottom: '10px' }}>
+              <input
+                type="checkbox"
+                checked={selectedIds.has(registration.receipt_id)}
+                onChange={() => handleCheckboxChange(registration.receipt_id)}
+              />
+              <p style={{ display: 'inline', marginLeft: '10px' }}>{registration.detail}</p>
+            </div>
+            <p style={{ fontWeight: 'bold' }}>
+              日付: {new Date(registration.date).toLocaleDateString()}
+            </p>
+            <ul style={{ paddingLeft: '20px' }}>
               {registration.items.map((item) => (
-                <li key={item.item_id}>
-                  {item.name} - {item.price}円 - {item.quantity}個
+                <li
+                  key={item.item_id}
+                  style={{
+                    border: '1px solid #ddd',
+                    marginBottom: '5px',
+                    padding: '5px',
+                    borderRadius: '5px',
+                    backgroundColor: '#f3f3f3',
+                  }}
+                >
+                  {item.name} ・ {item.price}円 ・ {item.quantity}個
                 </li>
               ))}
             </ul>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
