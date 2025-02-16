@@ -178,5 +178,20 @@ router.get('/total-assets', async (req, res) => {
   }
 });
 
+router.get('/category-summary', async (req, res) => {
+  try {
+    const categorySummary = await prisma.item.groupBy({
+      by: ['category'],
+      _sum: {
+        price: true,
+      },
+    });
+
+    res.json(categorySummary);
+  } catch (error) {
+    console.error('Error fetching category summary:', error);
+    res.status(500).json({ error: 'Failed to fetch category summary' });
+  }
+});
 
 module.exports = router;
