@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '../styles/Home.css';
 
 const Home = () => {
   const [totalAssets, setTotalAssets] = useState(null);
@@ -29,10 +30,17 @@ const Home = () => {
   }, []);
 
   const getBaloonSize = (price) => {
-    const minSize = 100;
+    const minSize = 10;
     const maxSize = 300;
     const maxPrice = Math.max(...categorySummary.map(category => category._sum.price));
     return minSize + (maxSize - minSize) * (price / maxPrice);
+  };
+
+  const getFontSize = (price) => {
+    const minFontSize = 10;
+    const maxFontSize = 30;
+    const maxPrice = Math.max(...categorySummary.map(category => category._sum.price));
+    return minFontSize + (maxFontSize - minFontSize) * (price / maxPrice);
   };
 
   const getBaloonColor = (category) => {
@@ -65,8 +73,18 @@ const Home = () => {
                 '--i': index, /* 追加 */
               }}
             >
-              <div className='baloonText'>{category.category}</div>
-              <div className='baloonValue'>{category._sum.price}円</div>
+              <div 
+                className='baloonText' 
+                style={{ fontSize: getFontSize(category._sum.price) }}
+              >
+                {category.category}
+              </div>
+              <div 
+                className='baloonValue' 
+                style={{ fontSize: getFontSize(category._sum.price) }}
+              >
+                {category._sum.price}円
+              </div>
             </div>
           ))}
         </div>
