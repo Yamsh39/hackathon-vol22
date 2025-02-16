@@ -2,12 +2,27 @@ import { Link } from 'react-router-dom';
 
 function Navigation() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-expand-md bg-white border-bottom shadow-sm fixed-top">
+    <nav className="navbar navbar-expand-md bg-white border-bottom shadow-sm fixed-top">
       <div className="container">
         {/* ブランド名 */}
         <Link className="navbar-brand fw-bold text-dark" to="/">家計管理</Link>
-        <div className="navbar-nav ms-auto">
-          <ul className="navbar-nav d-flex">
+        
+        {/* ハンバーガーメニュー（モバイル用） */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        {/* ナビゲーションメニュー */}
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link className="nav-link text-dark" to="/">Home</Link>
             </li>
