@@ -34,14 +34,25 @@
 
 /* 以下、他のカテゴリーのアイコンの色を追加 */
 .icon.food {
-    color: #34D399;
+    color: #FF1111
 }
 
 .icon.household {
     color: #60A5FA; /* 日用品カテゴリーの色 */
 }
   
-.icon.transport {
+.icon.hobby {
+    color: #34D399; /* 趣味カテゴリーの色 */
+}
+
+.icon.utility {
+    color: #F472B6; /* 医療カテゴリーの色 */
+}
+
+.icon.savings {
+    color: #818CF8; /* 教育カテゴリーの色 */
+}
+.icon.tax {
     color: #FB923C; /* 交通費カテゴリーの色 */
 }
 

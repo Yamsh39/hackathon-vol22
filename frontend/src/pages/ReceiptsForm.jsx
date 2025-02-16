@@ -90,12 +90,12 @@ const ReceiptForm = () => {
   };
   
   const categories = [
-    { name: '食費', icon: <FaUtensils />, style: styles.food },
-    { name: '日用品', icon: <FaShoppingCart />, style: styles.household },
-    { name: '趣味', icon: <FaGamepad />, style: styles.hobby },
-    { name: '水道光熱費', icon: <FaLightbulb />, style: styles.utility },
-    { name: '貯金投資', icon: <FaPiggyBank />, style: styles.savings },
-    { name: '税金保険', icon: <FaFileInvoice />, style: styles.tax },
+    { name: '食費', icon: <FaUtensils className={styles.icon + " " + styles.food} /> },
+    { name: '日用品', icon: <FaShoppingCart className={styles.icon + " " + styles.household} />,  },
+    { name: '趣味', icon: <FaGamepad  className={styles.icon + " " + styles.hobby } /> },
+    { name: '水道光熱費', icon: <FaLightbulb className={styles.icon + " " + styles.utility } />, },
+    { name: '貯金投資', icon: <FaPiggyBank  className={styles.icon + " " + styles.savings } />, },
+    { name: '税金保険', icon: <FaFileInvoice className={styles.icon + " " + styles.tax } />, style: styles.tax },
     { name: 'その他', icon: <FaEllipsisH />, style: styles.custom }, // カスタム入力専用
   ];
 
