@@ -1,9 +1,11 @@
-# hackathon-vol22
---
+# Smart Stack
+hackathon vol-22 
+Team: FujiTech
 
-# React + Vite
+Smart Stackは、最新の技術を駆使して、あなたの家計管理をより効率的にサポートします。レシートのスキャンから情報の抽出まで、全てをスマートに処理し、家計簿を自動で作成することができるアプリケーションです。
 
-このプロジェクトは、Reactを使ったフロントエンド、ExpressとNode.jsを使ったバックエンド、PostgreSQLを使ったデータベースを構築したフルスタックWebアプリケーションです。すべてのサービスはDockerでコンテナ化され、`docker-compose`を使って簡単に開発環境を立ち上げることができます。
+さらに、グラフやチャートを使った視覚的なデータ分析機能も搭載しており、家計の状態を一目でチェックできます。どこにお金がかかっているのか、どのカテゴリーで節約できるのかを簡単に理解でき、家計管理をより楽しくできます。
+---
 
 ## 技術スタック
 
@@ -79,18 +81,22 @@ npx prisma migrate dev
 ## ディレクトリ構成
 ```
 hackathon-vol22
+.
 ├── backend
 │   ├── prisma
+│   │   ├── migrations
 │   │   └── schema.prisma
+│   ├── routes
+│   │   ├── dbRoutes.js
+│   │   ├── geminiRoutes.js
+│   │   ├── incomeRoutes.js
+│   │   ├── ocrRoutes.js
+│   │   └── receiptRoutes.js
+│   ├── services
+│   │   ├── geminiService.js
+│   │   ├── ocrService.js
+│   │   └── receiptService.js
 │   ├── uploads
-│   ├──routes
-│   │   ├──geminiRoutes.js
-|   |   ├──ocrRoutes.js
-│   │   └──receiptRoutes.js
-│   ├──services
-│   │   ├──geminiRoutes.js
-|   |   ├──ocrRoutes.js
-│   │   └──receiptRoutes.js
 │   ├── .env
 │   ├── .gitignore
 │   ├── Dockerfile
@@ -98,16 +104,38 @@ hackathon-vol22
 │   ├── package.json
 │   └── server.js
 ├── frontend
-│   ├── public
-│   │   └── vite.svg
+│   ├── dist
+│   │   ├── assets
+│   │   │   ├── index-DWvwZDsY.js
+│   │   │   └── index-kQJbKSsj.css
+│   │   └── index.html
 │   ├── src
 │   │   ├── assets
 │   │   │   └── react.svg
+│   │   ├── components
+│   │   │   ├── DetailPopup.jsx
+│   │   │   └── Navigation.jsx
+│   │   ├── pages
+│   │   │   ├── About.jsx
+│   │   │   ├── GraphPage.jsx
+│   │   │   ├── Home.jsx
+│   │   │   ├── IncomeForm.jsx
+│   │   │   ├── IncomeHistory.jsx
+│   │   │   ├── NotFound.jsx
+│   │   │   ├── ReceiptsForm.jsx
+│   │   │   └── RegistrationHistory.jsx
+│   │   ├── styles
+│   │   │   ├── Button.module.css
+│   │   │   ├── DetailPopup.module.css
+│   │   │   ├── GraphPage.css
+│   │   │   ├── Home.css
+│   │   │   ├── IncomeHistory.module.css
+│   │   │   ├── Navigation.module.css
+│   │   │   └── RegistrationHistory.module.css
 │   │   ├── App.css
 │   │   ├── App.jsx
 │   │   ├── index.css
-│   │   ├── main.jsx
-│   │   └── ReceiptsForm.jsx
+│   │   └── main.jsx
 │   ├── Dockerfile
 │   ├── eslint.config.js
 │   ├── index.html
@@ -116,6 +144,8 @@ hackathon-vol22
 │   └── vite.config.js
 ├── .gitignore
 ├── docker-compose.yaml
+├── package-lock.json
+├── package.json
 └── README.md
 ```
 
