@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../styles/RegistrationHistory.module.css';
+import styles from '../styles/RegistrationHistory.module.css'; // CSSファイルをインポート
 
 const RegistrationHistory = () => {
   const [registrations, setRegistrations] = useState([]);
@@ -81,25 +81,32 @@ const RegistrationHistory = () => {
   return (
     <div className="container">
       <h1>登録履歴</h1>
-      <button onClick={handleSelectAll}>
-        {selectedIds.size === registrations.length ? '全選択解除' : '全選択'}
-      </button>
-      <button onClick={handleDeleteSelected} disabled={selectedIds.size === 0}>
-        選択したレコードを削除
-      </button>
-      <button onClick={toggleSortOrder}>
-        {sortOrder === 'asc' ? '新しい順に並べ替え' : '古い順に並べ替え'}
-      </button>
+      <div className={styles['buttons-container']}> {/* ボタンをこのdivで囲む */}
+        <button
+          onClick={handleSelectAll}
+          className={styles['button-select-all']}
+        >
+          {selectedIds.size === registrations.length ? '全選択解除' : '全選択'}
+        </button>
+        <button
+          onClick={handleDeleteSelected}
+          disabled={selectedIds.size === 0}
+          className={styles['button-delete']}
+        >
+          選択したレコードを削除
+        </button>
+        <button
+          onClick={toggleSortOrder}
+          className={styles['button-sort']}
+        >
+          {sortOrder === 'asc' ? '新しい順に並べ替え' : '古い順に並べ替え'}
+        </button>
+      </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
         {registrations.map((registration) => (
           <div
             key={registration.receipt_id}
-            style={{
-              border: '1px solid #ccc',
-              padding: '10px',
-              borderRadius: '8px',
-              backgroundColor: selectedIds.has(registration.receipt_id) ? '#c0f0ef' : '#f9f9f9', // チェックされたアイテムの背景色
-            }}
+            className={`${styles.card} ${selectedIds.has(registration.receipt_id) ? styles.selected : ''}`}
           >
             <div style={{ marginBottom: '10px' }}>
               <input
@@ -112,18 +119,9 @@ const RegistrationHistory = () => {
             <p style={{ fontWeight: 'bold' }}>
               日付: {new Date(registration.date).toLocaleDateString()}
             </p>
-            <ul style={{ paddingLeft: '20px', listStyleType: 'none' }}>
+            <ul>
               {registration.items.map((item) => (
-                <li
-                  key={item.item_id}
-                  style={{
-                    border: '1px solid #ddd',
-                    marginBottom: '5px',
-                    padding: '5px',
-                    borderRadius: '5px',
-                    backgroundColor: '#f3f3f3',
-                  }}
-                >
+                <li key={item.item_id} className={styles['card-item']}>
                   {item.name} {item.price}円 {item.quantity}個
                 </li>
               ))}

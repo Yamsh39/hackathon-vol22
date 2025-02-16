@@ -1,3 +1,79 @@
-.container {
-    margin-top: 20px;
+/* ボタンの共通スタイル */
+.button-select-all,
+.button-sort,
+.button-delete {
+  color: white;
+  padding: 8px 16px; /* ボタンのサイズを少し小さく */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px; /* フォントサイズを少し小さく */
+  margin-right: 10px;
+  margin-bottom: 10px; /* ボタンが縦に並ばないように間隔をつける */
+}
+
+/* 押せない場合のスタイル */
+.button-select-all:disabled,
+.button-sort:disabled,
+.button-delete:disabled {
+  cursor: not-allowed;
+  background-color: #ddd; /* 全てのボタンが無効の場合の色 */
+}
+
+/* 選択したレコードを削除ボタン */
+.button-delete {
+  background-color: #f44336; /* 押せる時の赤色 */
+}
+
+.button-delete:disabled {
+  background-color: #f5cccc; /* 押せない時の薄い赤色 */
+}
+
+/* 全選択・並べ替えボタン */
+.button-select-all {
+  background-color: #4CAF50; /* 緑色 */
+}
+
+.button-sort {
+  background-color: #4CAF50; /* 緑色 */
+}
+
+/* ボタンが無効な場合（選択解除時）の色 */
+.button-select-all:disabled,
+.button-sort:disabled {
+  background-color: #ddd; /* 無効時の薄い色 */
+}
+
+/* レイアウト調整: ボタンが横並びになるように */
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap; /* 横並びで折り返し可能に */
+  gap: 10px; /* ボタン間のスペース */
+  margin-bottom: 20px;
+}
+
+/* チェックされたアイテムの背景色 */
+.selected {
+  background-color: #c0f0ef;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-bottom: 20px;
+}
+
+.card-item {
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #f3f3f3;
+}
+
+.card-item li {
+  list-style-type: none;
+  padding-left: 20px;
 }
