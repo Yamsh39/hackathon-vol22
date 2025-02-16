@@ -1,0 +1,31 @@
+/* Navigation.module.css */
+.customNavbar {
+  background-color: #fef6d1;  /* 薄い黄色 */
+  border-bottom: 2px solid #f1d19f;  /* 薄いゴールドのボーダー */
+}
+
+.navLink {
+  color: #3c3c3c;  /* ダークグレー */
+  transition: color 0.3s ease;
+}
+
+.navLinkHover:hover {
+  color: #f19c42;  /* ホバー時にオレンジ色 */
+}
+
+.navbarBrand {
+  color: #2c2c2c;  /* ダークカラー */
+  font-family: 'Arial', sans-serif;  /* フォント変更 */
+}
+
+.navbarBrandHover:hover {
+  color: #f19c42;  /* ホバー時にオレンジ色 */
+}
+
+.navbarToggler {
+  background-color: transparent;  /* 初期背景色 */
+}
+
+.navbarToggler:hover {
+  background-color: #f19c42;  /* オレンジ色 */
+}
