@@ -37,6 +37,27 @@ app.get('/api/receipts/monthly-summary', async (req, res) => {
   }
 });
 
+// 年ごとの支出を取得するエンドポイントを追加
+app.get('/api/receipts/yearly-summary', async (req, res) => {
+  try {
+    const summary = await prisma.$queryRaw`
+      SELECT 
+        TO_CHAR(r."date", 'YYYY') AS year,
+        SUM(r."outcome") AS total_expense,
+        COALESCE(SUM(i."amount"), 0) AS total_income,
+        COALESCE(SUM(i."amount"), 0) - SUM(r."outcome") AS balance
+      FROM "Receipt" r
+      LEFT JOIN "Income" i ON TO_CHAR(r."date", 'YYYY') = TO_CHAR(i."date", 'YYYY')
+      GROUP BY year
+      ORDER BY year;
+    `;
+    res.json(summary);
+  } catch (error) {
+    console.error('Error fetching yearly summary:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // ルートを適用
 app.use('/ocr', ocrRoutes);
 app.use('/receipts', receiptRoutes);
