@@ -40,7 +40,7 @@ const Home = () => {
   };
 
   const getFontSize = (price) => {
-    const minFontSize = 10;
+    const minFontSize = 6;
     const maxFontSize = 30;
     const maxPrice = Math.max(...categorySummary.map(category => category._sum.price));
     return minFontSize + (maxFontSize - minFontSize) * (price / maxPrice);
