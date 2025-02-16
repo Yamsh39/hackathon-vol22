@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../styles/RegistrationHistory.css';
+import '../styles/RegistrationHistory.module.css';
 
 const RegistrationHistory = () => {
   const [registrations, setRegistrations] = useState([]);
@@ -79,7 +79,7 @@ const RegistrationHistory = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>登録履歴</h1>
       <button onClick={handleSelectAll}>
         {selectedIds.size === registrations.length ? '全選択解除' : '全選択'}

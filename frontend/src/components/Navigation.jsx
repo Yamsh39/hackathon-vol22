@@ -1,11 +1,14 @@
-import { Link } from 'react-router-dom';
+import styles from '../styles/Navigation.module.css';
+import { Link, useLocation } from 'react-router-dom';
 
 function Navigation() {
+  const location = useLocation();
+
   return (
-    <nav className="navbar navbar-expand-md bg-white border-bottom shadow-sm fixed-top">
+    <nav className={`navbar navbar-expand-md ${styles.customNavbar} border-bottom shadow-sm fixed-top`}>
       <div className="container">
         {/* ブランド名 */}
-        <Link className="navbar-brand fw-bold text-dark" to="/">家計管理</Link>
+        <Link className={`navbar-brand fw-bold ${styles.navbarBrand} ${styles.navbarBrandHover}`} to="/">Smart Stack</Link>
         
         {/* ハンバーガーメニュー（モバイル用） */}
         <button
@@ -24,25 +27,25 @@ function Navigation() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/">Home</Link>
+              <Link className={`nav-link ${styles.navLink} ${styles.navLinkHover}`} to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/calendar">カレンダー</Link>
+              <Link className={`nav-link ${styles.navLink} ${styles.navLinkHover}`} to="/calendar">カレンダー</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/receipt-registration">支出</Link>
+              <Link className={`nav-link ${styles.navLink} ${styles.navLinkHover}`} to="/receipt-registration">支出</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/receipt-income">収入</Link>
+              <Link className={`nav-link ${styles.navLink} ${styles.navLinkHover}`} to="/receipt-income">収入</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/registration-history">登録履歴</Link>
+              <Link className={`nav-link ${styles.navLink} ${styles.navLinkHover}`} to="/registration-history">登録履歴</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/income-history">収入履歴</Link>
+              <Link className={`nav-link ${styles.navLink} ${styles.navLinkHover}`} to="/income-history">収入履歴</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-dark" to="/graph">収支グラフ</Link>
+              <Link className={`nav-link ${styles.navLink} ${styles.navLinkHover}`} to="/graph">収支グラフ</Link>
             </li>
           </ul>
         </div>
