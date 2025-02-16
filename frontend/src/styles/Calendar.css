@@ -87,3 +87,11 @@ h3 {
   font-weight: 600;
 }
 
+.calendar-page {
+  padding-top: 50px; /* ヘッダーの高さ分を調整 */
+}
+
+.calendar-container {
+  padding: 20px;
+}
+
